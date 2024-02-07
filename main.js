@@ -44,21 +44,18 @@ notesContainer.addEventListener('click', function(e) {
 
 document.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Предотвращаем стандартное поведение клавиши Enter
+        event.preventDefault();
 
-        // Получаем текущее выделение и диапазон
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        // Создаем элемент перевода строки
+        const range = window.getSelection().getRangeAt(0);
         const lineBreak = document.createElement('br');
-        // Вставляем перевод строки в текущую позицию курсора
+
         range.deleteContents();
         range.insertNode(lineBreak);
-        // Перемещаем курсор после вставленного перевода строки
+
         range.setStartAfter(lineBreak);
         range.setEndAfter(lineBreak);
-        // Схлопываем выделение в конец диапазона
-        selection.removeAllRanges();
-        selection.addRange(range);
+
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
     }
 });
